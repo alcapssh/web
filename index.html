@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>BRIAN TGHOUL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Agregado -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="icon" href="https://i.imgur.com/19Ocnbu.gif" type="image/gif">
   <style>
@@ -11,14 +12,16 @@
       font-family: 'Share Tech Mono', monospace;
       text-align: center;
       margin: 0;
-      padding: 0;
+      padding: 0 1rem; /* Añadido padding horizontal para que no pegue al borde en móviles */
     }
 
     video {
-      width: 400px;
+      width: 100%;          /* Cambio: video ocupa 100% del contenedor */
+      max-width: 400px;     /* No más grande que 400px en pantallas grandes */
       border: 2px solid #000000;
-      margin: 2rem 0;
+      margin: 2rem auto;    /* Centrado con margin auto */
       border-radius: 8px;
+      display: block;       /* Para que margin auto funcione */
     }
 
     h4, p {
@@ -29,7 +32,7 @@
     .quote {
      color: #adff2f;
      text-align: center;
-     font-size: 1.5rem;
+     font-size: 1.3rem;     /* Ajuste un poco más pequeño para móviles */
      line-height: 1.6;
      margin: 20px auto;
      max-width: 80%;
@@ -63,6 +66,18 @@
       background-color: #ff4b4b;
       color: #000;
     }
+
+    /* Media Query para pantallas pequeñas */
+    @media (max-width: 480px) {
+      .quote {
+        font-size: 1rem;
+        max-width: 95%;
+      }
+      #playAudioBtn {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -74,7 +89,6 @@
     <source src="edit.mp4" type="video/mp4">
     Tu navegador no soporta video HTML5.
   </video>
-
 
   <center>
     <h4 class="quote">
@@ -145,7 +159,7 @@
       type();
     }
 
-    setTimeout(typeText, 1000); 
+    setTimeout(typeText, 1000);
   </script>
 
   <footer>
@@ -154,3 +168,4 @@
 
 </body>
 </html>
+
