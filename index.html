@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BRIAN TGHOUL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://i.imgur.com/19Ocnbu.gif" type="image/gif">
+  <style>
+    body {
+      background-color: #000000;
+      color: #ccc;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    video {
+      width: 400px;
+      border: 2px solid #000000;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    h4, p {
+     margin: 0.3rem 0;
+     line-height: 1.2;
+    }
+
+    .quote {
+     color: #adff2f;
+     text-align: center;
+     font-size: 1.5rem;
+     line-height: 1.6;
+     margin: 20px auto;
+     max-width: 80%;
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: #ff4b4b;
+      font-size: 0.9rem;
+    }
+
+    /* Botón minimalista arriba a la izquierda */
+    #playAudioBtn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: transparent;
+      border: 1px solid #ff4b4b;
+      color: #ff4b4b;
+      padding: 5px 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      border-radius: 4px;
+      user-select: none;
+      z-index: 1000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #playAudioBtn:hover {
+      background-color: #ff4b4b;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="playAudioBtn">Play Audio</button>
+
+  <!-- Video en lugar del GIF -->
+  <video id="bgVideo" autoplay muted playsinline>
+    <source src="edit.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
+
+  <center>
+    <h4 class="quote">
+      STARS CAN'T SHINE WITHOUT DARKNESS.<br>
+      SOMETIMES, THE LONGEST JOURNEYS<br>
+      ARE THE ONES WE TAKE WITHIN.<br>
+    </h4>
+
+    <p>Skills in <span id="jobTitle">----</span></p>
+  </center>
+
+  <script>
+    const vid = document.getElementById("bgVideo");
+    const loopThreshold = 0.1; // segundos antes de terminar para reiniciar
+
+    vid.addEventListener('timeupdate', () => {
+      if (vid.duration - vid.currentTime <= loopThreshold) {
+        vid.currentTime = 0;
+        vid.play();
+      }
+    });
+
+    // Activa el sonido después del primer clic
+    document.addEventListener("click", () => {
+      vid.muted = false;
+      vid.play();
+    }, { once: true });
+
+    // Botón para activar audio
+    document.getElementById('playAudioBtn').addEventListener('click', () => {
+      vid.muted = false;
+      vid.play();
+    });
+
+    // Animación de texto para Skills
+    const titles = ['Development', 'Python', 'Bash', 'Javascript', 'Rust'];
+    let jobTitle = document.getElementById('jobTitle');
+    let titleIndex = 0;
+
+    jobTitle.textContent = '|';
+
+    function typeText() {
+      const text = titles[titleIndex];
+      jobTitle.textContent = '';
+      let charIndex = 0;
+
+      function type() {
+        if (charIndex < text.length) {
+          jobTitle.textContent += text.charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 50);
+        } else {
+          setTimeout(deleteText, 2000);
+        }
+      }
+
+      function deleteText() {
+        if (jobTitle.textContent.length > 0) {
+          jobTitle.textContent = jobTitle.textContent.slice(0, -1);
+          setTimeout(deleteText, 50);
+        } else {
+          titleIndex = (titleIndex + 1) % titles.length;
+          jobTitle.textContent = '|';
+          setTimeout(typeText, 500);
+        }
+      }
+
+      type();
+    }
+
+    setTimeout(typeText, 1000); 
+  </script>
+
+  <footer>
+    Copyright ©Briantghoul 2025
+  </footer>
+
+</body>
+</html>
